@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+<mvc:annotation-driven>
+ <mvc:message-converters>
+<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+ <property name="supportedMediaTypes">
+ <list>
+ <value>text/html; charset=UTF-8</value>
+ <value>application/json; charset=UTF-8</value>
+ </list>
+ </property>
+ </bean>
+ </mvc:message-converters>
+</mvc:annotation-driven>
+<!-- 아래 내용에 따라 kr.co.mlec 패키지에 들어와야 spring-container의 관리를 받을 수 있음 -->
+   <context:component-scan base-package="kr.co.mlec" />
+    <mvc:annotation-driven />
+   <mvc:default-servlet-handler />
+   <mvc:view-resolvers>
+   <!-- 접두사로는 /WEB-INF/jsp/ 접미사로는 .jsp를 붙일게 하고 알려주는 것 -->
+      <mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp" />
+   </mvc:view-resolvers>
+</beans>
